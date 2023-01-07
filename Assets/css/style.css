@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+    padding: 20px;
+    font-size: 40px;
+}
+
+.card {
+    text-align: center;
+}
+
+.btn {
+    background-color: blueviolet;
+    color: black;
+    display: inline-block;
+    font-size: 22px;
+}
