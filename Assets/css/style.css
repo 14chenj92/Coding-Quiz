@@ -4,13 +4,29 @@ h1 {
     font-size: 40px;
 }
 
+
+.timer-count {
+    float: right;
+}
+
+.highscores {
+    text-align: start;
+}
+
 .card {
     text-align: center;
 }
 
-.btn {
+.start-button {
     background-color: blueviolet;
     color: black;
     display: inline-block;
     font-size: 22px;
+}
+
+.choice {
+    color: black;
+    display: inline-block;
+    font-size: 22px;
+    line-height: 16px;
 }

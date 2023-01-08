@@ -10,16 +10,29 @@
 
 <body>
   <header>
+    <div class="addons">
+      <button class="highscores">View Highscores</button>
+      <div class="timer-count">Time Left: 60</div>
+    </div>
   <h1>Coding Quiz Challenge</h1>
   <div class="card">
     <div class="card-header">
-        <button id="startbutton" class="btn">Start Quiz</button>
+        <button class="start-button">Start Quiz</button>
       </div>
   </header>
 
   <main>
-    <h2 id="countdown"></h2>
-    <div class="large-font timer-count">10</div>
+    <section>
+      <div class="multiple choice">
+        <div class="quiz-questions" id="question">
+          <button class="choice" id="A"></button>
+          <button class="choice" id="B"></button>
+          <button class="choice" id="C"></button>
+          <button class="choice" id="D"></button>
+        </div>
+      </div>
+    </section>
+    <div class="timer-count"></div>
   </main>
       <script src="./assets/js/script.js"></script>
 </body>

@@ -1,15 +1,35 @@
-var button = document.querySelector(".startbutton");
+var startbutton = document.querySelector(".start-button");
+var timerElement = document.querySelector(".timer-count");
+var questions = document.querySelector(".quiz-questions");
+var timer;
+var timerCount;
 
-var timerCount = 60;
+startbutton.addEventListener("click", quizstart);
 
-button.addEventListener("click", function() {
-  var timeInterval = setInterval(function () {
+function quizstart() {
+  starttimer()
+  timerCount = 60;
+  startquestions()
+}
+
+function starttimer() {
+  timer = setInterval(function() {
     timerCount--;
-    timerElement.textContent = timerCount;
-    if(timerCount === 0) {
-      clearInterval(timeInterval);
+    timerElement.textContent = "Time Left:" + timerCount;
+    if (timerCount >= 0) {
+      if (isWin && timerCount > 0) {
+        clearInterval(timer);
+        winGame();
+      }
     }
-}, 1000);
-})
+    if (timerCount === 0) {
+      clearInterval(timer);
+      loseGame();
+    }
+  }, 1000);
+}
 
 
+function startquestions() {
+  myquestions
+}
