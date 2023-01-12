@@ -14,7 +14,18 @@ var myquestions = [
     question: "Which of the following function of Array object creates a new array with all of the elements of this array for which the provided filtering function returns true?",
     choices: ["a. concat()", "b. every()", "c. filter()", "d. some()"],
     answer: "c"
-  }
+  },
+  {
+    question: "The function and var are known as:",
+    choices: ["a. keywords", "b. data types", "c. declaration statements", "d. prototypes"],
+    answer: "c"
+  },
+
+  {
+    question: "Which of the following number object function returns the value of the number?",
+    choices: ["a. toString()", "b. valueOf()", "c. toLocaleString()", "d.  toPrecision()"],
+    answer: "b"
+  },
 ];
 
 var startbutton = document.querySelector("#start-button");
@@ -34,8 +45,10 @@ var score = document.querySelector(".finalscore");
 var finishscreen = document.querySelector(".finishscreen");
 var highscore = document.querySelector(".highscorepage");
 var submitbutton = document.querySelector(".submit");
+var scorelist = document.querySelector("#scorelist");
 var backbutton = document.querySelector("#back");
 var clearbutton = document.querySelector("#clear");
+var initials = document.querySelector("#initial");
 var timer;
 var timerCount;
 var finalscore = 0;
@@ -44,8 +57,7 @@ choicebuttons.style.display = "none";
 finishscreen.style.display = "none";
 highscore.style.display = "none";
 
-
-
+//function to start the quiz 
 function quizstart() {
   starttimer()
   timerCount = 60;
@@ -54,6 +66,7 @@ function quizstart() {
   choicebuttons.style.display = "block";
 }
 
+//shows and starts the timer
 function starttimer() {
   timer = setInterval(function() {
     timerCount--;
@@ -64,6 +77,7 @@ function starttimer() {
   }, 1000);
 }
 
+//displays multiple choice on screen
 function startquestions (i) {
   questions.textContent = myquestions[i].question;
   A.textContent = myquestions[i].choices[0];
@@ -73,6 +87,7 @@ function startquestions (i) {
   questionnumber = i;
 }
 
+//checks if answer is correct or wrong
 function answercheck(event) {
   event.preventDefault();
   if (myquestions[questionnumber].answer === event.target.value) {
@@ -83,7 +98,7 @@ function answercheck(event) {
     answertext.textContent = "Wrong!";
   }      
 
-  if (questionnumber < 2) {
+  if (questionnumber < 4) {
       questionnumber++;
       startquestions(questionnumber);
   } else {
@@ -91,6 +106,7 @@ function answercheck(event) {
   }
 }
 
+//displays score for quiz + enter initials input
 function resultscreen() {
   finishscreen.style.display = "block";
   addons.style.display = "none";
@@ -99,6 +115,7 @@ function resultscreen() {
   score.textContent = "Your final score is " + finalscore;
 }
 
+//displays highscorespage
 function highscorepage() {
   addons.style.display = "none";
   choicebuttons.style.display = "none";
@@ -106,17 +123,33 @@ function highscorepage() {
   startpage.style.display = "none";
   finishscreen.style.display = "none";
   highscore.style.display = "block";
+  highscorerecord ()
 }
 
+//back button resets the page
 function reset () {
   location.reload();
 }
 
+//stores inputs and records them on highscore page
+function highscorerecord () {
+  localStorage.setItem("finalscore", JSON.stringify(finalscore));
+  localStorage.setItem("username", JSON.stringify(initials.value));
+  var usernameinput = JSON.parse(localStorage.getItem("finalscore"));
+  var finalscoreinput = JSON.parse(localStorage.getItem("username"));
+  scorelist.textContent = (usernameinput + "-" + finalscoreinput);
+  var ol = document.getElementById("scorelist");
+  ol.appendChild(li);
+}
+
+
+//clears the highscore list
 function clearlist() {
   localStorage.clear();
   scorelist.innerHTML="";
 }
 
+//event listeners button click to activate functions
 startbutton.addEventListener("click", quizstart);
 
 choicebuttons.addEventListener("click", answercheck);
@@ -124,6 +157,8 @@ choicebuttons.addEventListener("click", answercheck);
 highscores.addEventListener("click", highscorepage);
 
 submitbutton.addEventListener("click", highscorepage);
+
+submitbutton.addEventListener("click", highscorerecord);
 
 backbutton.addEventListener("click", reset);
 
